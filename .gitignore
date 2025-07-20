@@ -1,0 +1,43 @@
+# Entorno virtual
+venv/
+.env
+.env.*
+
+# Archivos de configuración de PyCharm, VSCode, etc.
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.log
+
+# Archivos temporales / cachés
+*.swp
+*.swo
+*.bak
+*.tmp
+*.DS_Store
+*.egg-info/
+.cache/
+dist/
+build/
+
+# Archivos generados
+downloads/
+*.mp3
+*.mp4
+
+# Docker
+*.tar
+*.pid
+*.sock
+
+# FastAPI auto-generated
+*.db
+*.sqlite3
+
+# Pydub / ffmpeg temp files
+temp/
