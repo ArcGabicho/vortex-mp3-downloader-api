@@ -33,17 +33,6 @@ Descarga directa del archivo .mp3.
 
 ---
 
-🧪 Ejemplo de uso con curl
-
-```bash
-curl -X POST http://localhost:8000/download-mp3 \
-  -H "Content-Type: application/json" \
-  -d '{"url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"}' \
-  --output output.mp3
-```
-
----
-
 ## 🛠 Requisitos locales
 
 - Python 3.10+
@@ -95,7 +84,7 @@ vortex-mp3-downloader-api/
 ├── Dockerfile
 ├── README.md
 ├── .gitignore
-└── .env.example
+└── LICENSE.md
 ```
 
 ---
@@ -103,23 +92,12 @@ vortex-mp3-downloader-api/
 ## 📦 .env.example
 
 ```bash
-# Puerto de la aplicación
 PORT=8000
 ```
 
 ```bash
-# Carpeta temporal de archivos
 TEMP_FOLDER=./temp
 ```
-
----
-
-## 🧠 Autor
-
-**Gabriel Polack**  
-Consultor TI & Arquitecto de Sofware   
-📎 [LinkedIn](https://linkedin.com/in/gabriel-polack-castillo/)  
-💻 [GitHub](https://github.com/ArcGabicho)
 
 ---
 
