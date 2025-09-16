@@ -1,16 +1,16 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
-from fastapi.middleware.cors import CORSMiddleware  # <-- Importa el middleware
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from app.services import download_audio_stream_from_youtube
 import os
 
 app = FastAPI()
 
-# Agrega configuración CORS
+# Configuración CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://vortex-mp3-downloader-app.vercel.app"],  # Puedes poner el dominio de tu frontend en producción
+    allow_origins=["https://vortex-mp3-downloader-app.vercel.app"],  # Sin la barra final
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
