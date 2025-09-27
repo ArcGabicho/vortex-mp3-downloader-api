@@ -33,43 +33,23 @@ Descarga directa del archivo .mp3.
 
 ---
 
-## 🛠 Requisitos locales
 
-- Python 3.10+
+## � Uso con Docker
 
-- ffmpeg (para pydub)
-
-## Instalar dependencias:
-
-```bash
-python -m venv venv
-```
-
-```bash
-venv\Scripts\activate
-```
-
-```bash
-pip install -r requirements.txt
-```
-
-```bash
-uvicorn app.main:app --reload
-```
-
----
-
-## 🐳 Docker
-
-Construir y ejecutar con Docker:
+Construir la imagen y ejecutar el contenedor:
 
 ```bash
 docker build -t vortex-mp3-downloader-api .
 ```
 
 ```bash
-uvicorn app.main:app --reload
+docker run -d -p 8000:8000 --name vortex-mp3-downloader-api vortex-mp3-downloader-api
 ```
+
+El servicio estará disponible en `http://localhost:8000`.
+
+Si usas Railway u otra plataforma, el contenedor detectará automáticamente el puerto asignado por la variable de entorno `PORT`.
+
 
 ---
 
