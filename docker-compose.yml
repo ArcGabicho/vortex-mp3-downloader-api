@@ -1,13 +1,14 @@
 version: '3.8'
+
 services:
   api:
     build: .
     container_name: vortex-mp3-downloader-api
     ports:
       - "8000:8000"
-    volumes:
-      - .:/app
     environment:
       - PYTHONUNBUFFERED=1
-    command: >
-      sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    # Volumen para archivos temporales (opcional)
+    volumes:
+      - ./temp:/tmp/downloads
+    restart: unless-stopped

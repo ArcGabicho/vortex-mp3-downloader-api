@@ -1,32 +1,29 @@
-from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-from app.services import download_audio_stream_from_youtube
-import os
+from app.api.routes import router
 
-app = FastAPI()
+app = FastAPI(
+    title="YouTube to MP3 Downloader API",
+    description="API para convertir videos de YouTube a MP3 y extraer metadatos",
+    version="1.0.0"
+)
 
-# Configuración CORS
+# Configurar CORS para permitir peticiones desde Next.js
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://vortex-mp3-downloader-app.vercel.app"],  # Sin la barra final
+    allow_origins=["*"],  # En producción, especifica dominios concretos
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-class DownloadRequest(BaseModel):
-    video_url: str
+# Montar las rutas
+app.include_router(router, prefix="/api/v1", tags=["downloads"])
 
-@app.post("/download-mp3")
-async def download_mp3(request: DownloadRequest):
-    try:
-        file_path = download_audio_stream_from_youtube(request.video_url)
-        return FileResponse(
-            path=file_path,
-            media_type="audio/mpeg",
-            filename=os.path.basename(file_path),
-        )
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+@app.get("/")
+async def root():
+    return {"message": "YouTube to MP3 Downloader API"}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
