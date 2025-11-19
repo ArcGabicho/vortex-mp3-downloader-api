@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: vortex-mp3-downloader-api-prod
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PORT=8000
+    volumes:
+      # Solo volumen para archivos temporales
+      - ./temp:/tmp/downloads
+    restart: unless-stopped
+    # No hot reload en producción
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+
+  # Opcional: Nginx como reverse proxy
+  nginx:
+    image: nginx:alpine
+    container_name: vortex-mp3-downloader-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api
+    restart: unless-stopped
+    profiles:
+      - nginx

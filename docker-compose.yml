@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: vortex-mp3-downloader-api
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PORT=8000
+    volumes:
+      # Volumen para archivos temporales (persiste entre reinicios)
+      - ./temp:/tmp/downloads
+      # Volumen para desarrollo (hot reload)
+      - .:/app
+    restart: unless-stopped
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # Servicio para desarrollo con hot reload (opcional)
+  api-dev:
+    build: .
+    container_name: vortex-mp3-downloader-api-dev
+    ports:
+      - "8001:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PORT=8000
+    volumes:
+      - .:/app
+      - ./temp:/tmp/downloads
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    profiles:
+      - dev
