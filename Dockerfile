@@ -18,8 +18,5 @@ COPY . .
 # Verificar que FFmpeg está instalado correctamente
 RUN ffmpeg -version
 
-# Exponer el puerto (Railway maneja esto automáticamente)
-EXPOSE 8000
-
 # Comando para ejecutar la aplicación
-CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD uvicorn app.main:app --host 0.0.0.0 --port $PORT
