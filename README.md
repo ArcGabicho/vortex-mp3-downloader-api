@@ -1,8 +1,6 @@
 # 🎵 YouTube to MP3 Downloader API
 
-<p align="center">
-  <img src="https://i.imgur.com/mU8Uxu2.png" alt="YouTube to MP3 API" width="600"/>
-</p>
+![Portada](https://i.imgur.com/mU8Uxu2.png)
 
 Una API REST moderna construida con **FastAPI** para descargar videos de YouTube y convertirlos a MP3, extrayendo metadatos completos del video. 
 
