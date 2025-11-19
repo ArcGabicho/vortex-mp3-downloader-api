@@ -18,5 +18,8 @@ COPY . .
 # Verificar que FFmpeg está instalado correctamente
 RUN ffmpeg -version
 
-# Comando para ejecutar la aplicación
-CMD uvicorn app.main:app --host 0.0.0.0 --port $PORT
+# Exponer el puerto por defecto
+EXPOSE 8000
+
+# Comando para ejecutar la aplicación con fallback
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
